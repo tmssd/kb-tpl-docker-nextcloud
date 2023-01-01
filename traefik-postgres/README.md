@@ -98,7 +98,7 @@ docker-compose up -d
     docker exec -it nextcloud sudo -u www-data php -d memory_limit=-1 /var/www/html/occ config:app:set --value="256" previewgenerator heightSizes
     ```
 
-    If you want to regenerate all previews after some time, delete the `/var/www/html/data/appdata_xxxxx/preview` folder, then run this command so that nextcloud knows they've been deleted:
+    If you want to regenerate all previews after some time, delete the `/var/www/html/data/appdata_xxxxx/preview` folder, then run this command so that nextcloud knows they've been deleted.
 
     ```
     docker exec -it nextcloud sudo -u www-data php -d memory_limit=-1 /var/www/html/occ files:scan-app-data
