@@ -12,7 +12,7 @@ docker-compose.yml
 Dockerfile
 ```
 
-## Envionment
+## Environment
 
 Duplicate the `.env.template` and rename it to `.env`
 In the `.env` file, add below information.
