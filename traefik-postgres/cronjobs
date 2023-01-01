@@ -1,0 +1,17 @@
+
+# NEXTCLOUD CRONJOBS:
+
+# Default background jobs
+*/5 * * * * docker exec nextcloud sudo -u www-data php -d memory_limit=-1 -f /var/www/html/cron.php 1>/dev/null
+
+# Scan Nextcloud files
+0 1 * * * docker exec nextcloud sudo -u www-data php -d memory_limit=-1 /var/www/html/occ files:scan --all 1>/dev/null
+
+# Preview Generator app
+*/30 * * * * docker exec nextcloud sudo -u www-data php -d memory_limit=-1 /var/www/html/occ preview:pre-generate 1>/dev/null
+
+# PostgreSQL - backup all databases (runs every Sunday at 8am)
+0 0 * * 0 docker exec nextcloud-postgres pg_dumpall -U nextcloud > $HOME/dockerapps/nextcloud/backups/database/nextcloud-postgres-dbs-backup-`date +\%Y\%m\%d\%H\%M\%S`.sql
+
+# PostgreSQL - delete backups that are older than 30 days (runs everyday at 12am)
+0 * * * * find $HOME/dockerapps/nextcloud/backups/database -name "nextcloud-postgres-dbs-backup-*.sql" -type f -mtime +30 -delete
