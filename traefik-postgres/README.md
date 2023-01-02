@@ -110,6 +110,12 @@ docker-compose up -d
     docker exec -it nextcloud sudo -u www-data php -d memory_limit=-1 /var/www/html/occ preview:generate-all -vvv
     ```
 
+5. Setup cron jobs using `setup-cron.sh`
+
+    ```
+    ./setup-cron.sh
+    ```
+
 ## Tips
 
 Entering the shell of the running _nextcloud_ container:
